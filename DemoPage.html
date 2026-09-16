@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HTML5 · CSS3 · JavaScript 학습 예제</title>
+<style>
+  /* 전체 공통 스타일 */
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: "맑은 고딕", "Segoe UI", sans-serif;
+    background: linear-gradient(135deg, #74ebd5, #9face6);
+    color: #222;
+    line-height: 1.6;
+    padding: 20px;
+  }
+
+  header {
+    text-align: center;
+    padding: 30px 10px;
+    color: #fff;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+  }
+
+  header h1 {
+    font-size: 2.2em;
+  }
+
+  main {
+    max-width: 800px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 12px;
+    padding: 25px 30px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  }
+
+  section {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px dashed #ccc;
+  }
+
+  section:last-child {
+    border-bottom: none;
+  }
+
+  h2 {
+    color: #4a4a9c;
+    margin-bottom: 12px;
+    border-left: 5px solid #4a4a9c;
+    padding-left: 10px;
+  }
+
+  /* 버튼 스타일 */
+  button {
+    background: #4a4a9c;
+    color: #fff;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background 0.3s, transform 0.2s;
+  }
+
+  button:hover {
+    background: #35356e;
+    transform: translateY(-2px);
+  }
+
+  /* 색상 변경 박스 예제 */
+  #colorBox {
+    width: 120px;
+    height: 120px;
+    background: #ffb347;
+    margin: 15px auto;
+    border-radius: 10px;
+    transition: background 0.4s ease;
+  }
+
+  /* 폼 예제 */
+  input[type="text"] {
+    padding: 8px 10px;
+    border: 1px solid #aaa;
+    border-radius: 6px;
+    width: 60%;
+    font-size: 1em;
+  }
+
+  #greetOutput {
+    margin-top: 10px;
+    font-weight: bold;
+    color: #2c662d;
+  }
+
+  /* 리스트 예제 */
+  ul#todoList {
+    list-style: none;
+    margin-top: 10px;
+  }
+
+  ul#todoList li {
+    background: #f0f0ff;
+    margin: 6px 0;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+
+  ul#todoList li.done {
+    text-decoration: line-through;
+    color: #999;
+    background: #e6e6e6;
+  }
+
+  footer {
+    text-align: center;
+    color: #fff;
+    padding: 20px 10px;
+    font-size: 0.9em;
+  }
+
+  /* 반응형 */
+  @media (max-width: 600px) {
+    header h1 {
+      font-size: 1.5em;
+    }
+    main {
+      padding: 15px;
+    }
+  }
+</style>
+</head>
+<body>
+
+  <header>
+    <h1>HTML5 · CSS3 · JavaScript 학습 페이지</h1>
+    <p>하나의 파일 안에서 웹 기술 3형제를 함께 배워봅시다</p>
+  </header>
+
+  <main>
+
+    <!-- HTML5 시맨틱 태그 예제 -->
+    <section>
+      <h2>1. HTML5 시맨틱 태그</h2>
+      <p>이 페이지는 <code>&lt;header&gt;</code>, <code>&lt;main&gt;</code>,
+        <code>&lt;section&gt;</code>, <code>&lt;footer&gt;</code> 같은
+        HTML5 시맨틱 태그로 구성되어 있습니다.</p>
+    </section>
+
+    <!-- CSS3 예제: 버튼 클릭 시 박스 색상 변경 -->
+    <section>
+      <h2>2. CSS3 트랜지션 예제</h2>
+      <p>버튼을 누르면 아래 박스의 배경색이 부드럽게 바뀝니다.</p>
+      <div id="colorBox"></div>
+      <button onclick="changeColor()">색상 바꾸기</button>
+    </section>
+
+    <!-- JavaScript 예제: 입력값 처리 -->
+    <section>
+      <h2>3. JavaScript로 인사말 만들기</h2>
+      <input type="text" id="nameInput" placeholder="이름을 입력하세요">
+      <button onclick="greet()">인사하기</button>
+      <p id="greetOutput"></p>
+    </section>
+
+    <!-- JavaScript 예제: 할 일 목록 -->
+    <section>
+      <h2>4. 간단한 할 일 목록 (To-Do List)</h2>
+      <input type="text" id="todoInput" placeholder="할 일을 입력하세요">
+      <button onclick="addTodo()">추가</button>
+      <ul id="todoList"></ul>
+      <p>목록 항목을 클릭하면 완료 표시가 됩니다.</p>
+    </section>
+
+    <!-- JavaScript 예제: 시계 -->
+    <section>
+      <h2>5. 실시간 시계</h2>
+      <p id="clock" style="font-size: 1.5em; font-weight: bold;"></p>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2026 HTML5 / CSS3 / JavaScript 학습용 예제 페이지</p>
+  </footer>
+
+  <script>
+    // 2. 색상 박스 랜덤 색상 변경
+    function changeColor() {
+      const box = document.getElementById('colorBox');
+      const randomColor = '#' + Math.floor(Math.random() * 0xffffff)
+        .toString(16)
+        .padStart(6, '0');
+      box.style.background = randomColor;
+    }
+
+    // 3. 인사말 출력
+    function greet() {
+      const name = document.getElementById('nameInput').value.trim();
+      const output = document.getElementById('greetOutput');
+      output.textContent = name ? `안녕하세요, ${name}님! 반갑습니다.` : '이름을 입력해주세요.';
+    }
+
+    // 4. 할 일 목록 추가 및 완료 토글
+    function addTodo() {
+      const input = document.getElementById('todoInput');
+      const text = input.value.trim();
+      if (!text) return;
+
+      const li = document.createElement('li');
+      li.textContent = text;
+      li.addEventListener('click', () => li.classList.toggle('done'));
+
+      document.getElementById('todoList').appendChild(li);
+      input.value = '';
+    }
+
+    // 5. 실시간 시계 갱신
+    function updateClock() {
+      const now = new Date();
+      const clockEl = document.getElementById('clock');
+      clockEl.textContent = now.toLocaleTimeString('ko-KR');
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+  </script>
+
+</body>
+</html>
