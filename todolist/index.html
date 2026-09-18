@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="간단하고 명확하게 할 일을 관리하는 Todo List">
+  <title>Todo List</title>
+  <script>
+    window.tailwind = {
+      config: {
+      theme: {
+        extend: {
+          colors: {
+            ink: '#171717',
+            paper: '#f3f0e8',
+            cityRed: '#d52b1e',
+          },
+        },
+      },
+      },
+    };
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="tailwind.css">
+  <script src="script.js" defer></script>
+</head>
+<body class="antialiased">
+  <main class="todo-app mx-auto">
+    <header class="app-header">
+      <div>
+        <p class="eyebrow">NEW YORK / DAILY EDITION</p>
+        <h1>Todo List</h1>
+        <p id="list-summary" class="list-summary" aria-live="polite">할 일을 불러오는 중입니다.</p>
+      </div>
+      <div class="header-mark" aria-hidden="true">✓</div>
+    </header>
+
+    <form id="todo-form" class="todo-form">
+      <label for="todo-input" class="sr-only">새 할 일</label>
+      <input
+        id="todo-input"
+        name="todo"
+        type="text"
+        maxlength="120"
+        autocomplete="off"
+        placeholder="오늘 해야 할 일을 적어보세요"
+      >
+      <button type="submit" class="add-button">추가</button>
+    </form>
+    <p id="form-message" class="form-message" role="status" aria-live="polite"></p>
+
+    <nav class="filter-tabs" aria-label="할 일 필터">
+      <button type="button" class="filter-button is-active" data-filter="all" aria-pressed="true">전체</button>
+      <button type="button" class="filter-button" data-filter="active" aria-pressed="false">진행 중</button>
+      <button type="button" class="filter-button" data-filter="completed" aria-pressed="false">완료</button>
+    </nav>
+
+    <section class="list-panel" aria-labelledby="list-heading">
+      <div class="list-heading-row">
+        <h2 id="list-heading">오늘의 목록</h2>
+        <span id="visible-count" class="visible-count">0개</span>
+      </div>
+      <ul id="todo-list" class="todo-list" aria-live="polite"></ul>
+    </section>
+
+    <footer class="todo-summary">
+      <span id="remaining-count">0개 남음</span>
+      <span class="summary-divider" aria-hidden="true"></span>
+      <span id="completed-count">0개 완료</span>
+    </footer>
+  </main>
+</body>
+</html>
